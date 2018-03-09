@@ -1,11 +1,11 @@
 import React from 'react'
-import SignUpDialog from './C&I/SignUpDialog'
+import Game from './Tgame/Game'
 
 class App extends React.Component {
   
   render() {
     return (
-      <SignUpDialog  />
+      <Game  />
     )
   }
 }

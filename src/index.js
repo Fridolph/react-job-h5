@@ -6,12 +6,6 @@ import App from './App'
 // import Clock from './components/Clock'
 import registerServiceWorker from './registerServiceWorker'
 
-function tick() {
-  ReactDOM.render(<App />, document.getElementById('root'))
-}
-
-setTimeout(tick, 1000)
-
-
+ReactDOM.render(<App />, document.getElementById('root'))
 
 registerServiceWorker()
