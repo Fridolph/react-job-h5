@@ -1,0 +1,19 @@
+.error-msg {
+  color: #f50;
+  padding: 10px 0 0 10px;
+}
+.am-tab-bar {
+  position:fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.fixed-header .am-navbar {
+  position:fixed;
+  top: 0;
+  width: 100%;
+}
+
+.page-content {
+  padding: 45px 5px;
+}
