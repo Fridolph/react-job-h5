@@ -13,6 +13,7 @@ mongoose.connection.on('connected', () => {
 const userRouter = require('./user')
 const app = express()
 // 使用中间件
+app.use(express.static('public'))
 app.use(cookieParser())
 app.use(bodyParser.json())
 app.use('/user', userRouter)

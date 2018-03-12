@@ -9,7 +9,7 @@ const _filter = { pwd: 0, __v: 0 }
 
 /*************************************************** */
 
-Router.get('/list', (req, res) => {
+Router.get('/list', (req, res) => {  
   const { type } = req.query
   User.find({type}, (err, doc) => {
     return res.json({code: 0, data: doc})
