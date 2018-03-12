@@ -1,22 +1,18 @@
 import React, { Component } from 'react'
 import Logo from '../../Components/logo/logo'
 import { List, InputItem, WingBlank, WhiteSpace, Button } from 'antd-mobile'
-import {Redirect} from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 // redux
-import {connect} from 'react-redux'
-import {login} from '../../Reducers/user.redux'
+import { connect } from 'react-redux'
+import { login } from '../../Reducers/user.redux'
+// 组件
+import ImoocForm from '../../Components/ImoocForm/ImoocForm'
 
-@connect(
-  state => state.user,
-  {login}
-)
+@connect(state => state.user, { login })
+@ImoocForm
 class Login extends Component {
   constructor(props) {
-    super(props)
-    this.state = {
-      user: '',
-      pwd: ''
-    }
+    super(props)    
   }
 
   handleEnterLogin(e) {
@@ -31,29 +27,33 @@ class Login extends Component {
   handleLogin() {
     // console.log('this.props', this.props)
     // console.log('this.state', this.state)
-    this.props.login(this.state)
-  }
-
-  handleInputChange(key, value) {
-    this.setState({
-      [key]: value
-    })
+    this.props.login(this.props.state)
   }
 
   render() {
     return (
       <div>
-        {this.props.redirectTo ? <Redirect to={this.props.redirectTo} /> : null}
+        {this.props.redirectTo && this.props.redirectTo !== 'login' ? (
+          <Redirect to={this.props.redirectTo} />
+        ) : null}
         <Logo />
         <h2 style={{ textAlign: 'center' }}>登录页</h2>
         <WingBlank>
-          <List>  
-            {this.props.msg ? <p className="error-msg">{this.props.msg}</p> : null}          
-            <InputItem onChange={value => this.handleInputChange('user', value)}>
+          <List>
+            {this.props.msg ? (
+              <p className="error-msg">{this.props.msg}</p>
+            ) : null}
+            <InputItem
+              onChange={value => this.props.handleChange('user', value)}
+            >
               用户
             </InputItem>
             <WhiteSpace />
-            <InputItem type="password" onKeyPress={e => this.handleEnterLogin(e)} onChange={value => this.handleInputChange('pwd', value)}>
+            <InputItem
+              type="password"
+              onKeyPress={e => this.handleEnterLogin(e)}
+              onChange={value => this.props.handleChange('pwd', value)}
+            >
               密码
             </InputItem>
           </List>

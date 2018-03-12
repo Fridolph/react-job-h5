@@ -5,28 +5,14 @@ import { getRedirectPath } from '../util/url'
 const AUTH_SUCCESS = 'AUTH_SUCCESS'
 const ERROR_MSG = 'ERROR_MSG'
 const LOAD_DATA = 'LOAD_DATA'
+const LOGOUT = 'LOGOUT'
+
 // 初始状态
 const initState = {
-  redirecttTo: '',
+  redirectTo: '',
   msg: '',
   user: '',
   type: ''
-}
-
-// Action
-function errorMsg(msg) {
-  return {
-    msg,
-    type: ERROR_MSG
-  }
-}
-
-function authSuccess(obj) {
-  const { pwd, ...data } = obj
-  return {
-    type: AUTH_SUCCESS,
-    payload: data
-  }
 }
 
 /* **************************** reducer *****************************/
@@ -45,6 +31,8 @@ export function user(state = initState, action) {
       }
     case LOAD_DATA:
       return { ...state, ...action.playload }
+    case LOGOUT:
+      return {...initState, redirectTo: '/login'}
     case ERROR_MSG:
       return { ...state, msg: action.msg, isAuth: false }
     default:
@@ -53,6 +41,28 @@ export function user(state = initState, action) {
 }
 
 /* **************************** Action Creators *****************************/
+
+function errorMsg(msg) {
+  return {
+    msg,
+    type: ERROR_MSG
+  }
+}
+
+function authSuccess(obj) {
+  const { pwd, ...data } = obj
+  return {
+    type: AUTH_SUCCESS,
+    payload: data
+  }
+}
+
+export function loadData(userinfo) {
+  return {
+    type: LOAD_DATA,
+    payload: userinfo
+  }
+}
 
 /**
  * 用户注册接口
@@ -105,6 +115,7 @@ export function login({ user, pwd }) {
   }
 }
 
+// 更新数据
 export function update(data) {
   return dispatch => {
     axios.post('/user/update', data).then(res => {
@@ -115,4 +126,9 @@ export function update(data) {
       }
     })
   }
+}
+
+// 注销操作
+export function logoutSubmit() {
+  return {type: LOGOUT}
 }

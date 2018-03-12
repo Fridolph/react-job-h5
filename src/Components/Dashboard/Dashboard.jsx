@@ -58,7 +58,9 @@ class Dashboard extends Component {
             <Route key={v.path} path={v.path} component={v.component} />
           ))}
         </Switch>
-        <NavLinkBar data={navList} />
+        <div>
+          <NavLinkBar data={navList} />
+        </div>
       </div>
     )
   }
