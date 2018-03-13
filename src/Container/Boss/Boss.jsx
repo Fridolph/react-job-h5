@@ -1,16 +1,17 @@
 import React, { Component } from 'react'
-import {connect} from 'react-redux'
-import {getUserList} from '../../Reducers/chatuser.redux'
+import { connect } from 'react-redux'
+import { getUserList } from '../../Reducers/chatuser.redux'
 // 组件
 import UserCard from '../../Components/UserCard/UserCard'
 
-@connect(
-  state => state.chatuser,
-  {getUserList}
-)
-class Boss extends Component {  
+@connect(state => state.chatuser, { getUserList })
+class Boss extends Component {
   render() {
-    return <UserCard userlist={this.props.userlist} />
+    return (
+      <div className="page-content-wrapper">
+        <UserCard userlist={this.props.userlist} />
+      </div>      
+    )
   }
 
   componentDidMount() {

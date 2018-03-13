@@ -28,9 +28,50 @@
   text-align: right;
 }
 
+#chat-page .am-grid-icon {
+  display: none;
+  /* width: 30px !important;height: 30px; */
+  /* margin: 0; */
+}
+#chat-page .am-grid-text {
+  margin-top: 0;
+}
+
+#chat-page .am-navbar {
+  position:fixed;
+  top: 0;
+  left:0;
+  width: 100%;
+  z-index: 10;
+}
+#chat-page .chat-content-wrapper{
+  position: fixed;
+  top: 45px;
+  bottom: 50px;
+  left:0;
+  right: 0;
+  width: 100%;
+  /* height: 100%; */
+  overflow: auto;
+}
+
+.page-content-wrapper {
+  position: fixed;
+  top: 45px;
+  bottom: 50px;
+  left:0;
+  right: 0;
+  width: 100%;
+  /* height: 100%; */
+  overflow: auto;
+}
+/* 消息列表 的箭头 */
+.msg-list-wrapper .am-list-arrow-horizontal {
+  transform:translateY(3px);
+}
 .sticky-footer {
   z-index: 10;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   width: 100%;
 }
