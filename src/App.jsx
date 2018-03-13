@@ -8,6 +8,8 @@ import Register from './Container/Register/Register'
 import BossInfo from './Container/BossInfo/BossInfo'
 import GeniusInfo from './Container/GeniusInfo/GeniusInfo'
 import Dashboard from './Components/Dashboard/Dashboard'
+import Chat from './Container/Chat/Chat'
+
 
 class App extends Component {  
   render() {
@@ -23,6 +25,7 @@ class App extends Component {
           <Route path="/geniusinfo" component={GeniusInfo} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
+          <Route path="/chat/:user" component={Chat} />
           <Route component={Dashboard} />
         </Switch>
       </div>

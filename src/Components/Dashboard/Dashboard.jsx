@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Route, Switch } from 'react-router-dom'
+import {getMsgList, recvMsg} from '../../Reducers/chat.redux'
 // 组件
 import { NavBar } from 'antd-mobile'
 import NavLinkBar from '../NavLinkBar/NavLinkBar'
@@ -9,7 +10,7 @@ import Genius from '../../Container/Genius/Genius'
 import Msg from '../../Container/Msg/Msg'
 import Me from '../../Container/Me/Me'
 
-@connect(state => state)
+@connect(state => state, {getMsgList, recvMsg})
 class Dashboard extends Component {  
 
   render() {
@@ -63,6 +64,11 @@ class Dashboard extends Component {
         </div>
       </div>
     )
+  }
+
+  componentDidMount() {
+    this.props.getMsgList()
+    this.props.recvMsg()
   }
 }
 
