@@ -19,7 +19,7 @@ const app = express()
 // socket io
 const server = require('http').Server(app)
 const io = require('socket.io')(server)
-
+// Chat.remove({}, (err,doc) => {})
 io.on('connection', socket => {
   console.log('user login')
   socket.on('sendmsg', data => {

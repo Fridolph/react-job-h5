@@ -11,10 +11,10 @@ const _filter = { pwd: 0, __v: 0 }
 /*************************************************** */
 // Chat.remove({}, (err, doc) => {})
 
-Router.get('/list', (req, res) => {  
+Router.get('/list', (req, res) => {
   const { type } = req.query
-  User.find({type}, (err, doc) => {
-    return res.json({code: 0, data: doc})
+  User.find({ type }, (err, doc) => {
+    return res.json({ code: 0, data: doc })
   })
 })
 
@@ -82,13 +82,32 @@ Router.get('/getmsglist', (req, res) => {
         avatar: v.avatar
       }
     })
-    Chat.find({'$or': [
-      {from: user}, {to: user}
-    ]}, (err, doc) => {
-      if (err) return res.json({code: 1})
-      return res.json({code: 0, msgs: doc, users})
-    })
-  })  
+    Chat.find(
+      {
+        $or: [{ from: user }, { to: user }]
+      },
+      (err, doc) => {
+        if (err) return res.json({ code: 1 })
+        return res.json({ code: 0, msgs: doc, users })
+      }
+    )
+  })
+})
+
+Router.post('/readmsg', (req, res) => {
+  const { userid } = req.cookies
+  const { from } = req.body
+  // console.log('userid: ', userid, '\nfrom: ', from)
+  Chat.update(
+    { from, to: userid }, 
+    { $set: { read: true } },
+    { multi: true },
+    (err, doc) => {
+      // console.log('读取消息后的修改结果', doc)
+      if (err) return res.json({code: 1, msg: '修改失败'})
+      return res.json({code: 0, num: doc.nModified})
+    }
+  )
 })
 
 module.exports = Router
