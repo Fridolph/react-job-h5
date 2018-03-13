@@ -5,9 +5,11 @@ const md5Pwd = require('./util/pwd').md5Pwd
 // mongodb
 const model = require('./model')
 const User = model.getModel('user')
+const Chat = model.getModel('chat')
 const _filter = { pwd: 0, __v: 0 }
 
 /*************************************************** */
+// Chat.remove({}, (err, doc) => {})
 
 Router.get('/list', (req, res) => {  
   const { type } = req.query
@@ -56,7 +58,7 @@ Router.get('/info', (req, res) => {
   })
 })
 
-Router.post('/update', function(req, res) {
+Router.post('/update', (req, res) => {
   const userid = req.cookies.userid
   // console.log('cookies', req.cookies)
   if (!userid) return json.dumps({ code: 1 })
@@ -67,6 +69,26 @@ Router.post('/update', function(req, res) {
     const data = Object.assign({}, { user: doc.user, type: doc.type }, body)
     return res.json({ code: 0, data })
   })
+})
+
+Router.get('/getmsglist', (req, res) => {
+  const user = req.cookies.userid
+
+  User.find({}, (e, userdoc) => {
+    let users = {}
+    userdoc.forEach(v => {
+      users[v._id] = {
+        name: v.user,
+        avatar: v.avatar
+      }
+    })
+    Chat.find({'$or': [
+      {from: user}, {to: user}
+    ]}, (err, doc) => {
+      if (err) return res.json({code: 1})
+      return res.json({code: 0, msgs: doc, users})
+    })
+  })  
 })
 
 module.exports = Router
