@@ -19,15 +19,15 @@ import ImoocForm from '../../Components/ImoocForm/ImoocForm'
 )
 @ImoocForm
 class Register extends Component {
-  constructor(props) {
-    super(props)
+  // constructor(props) {
+  //   super(props)
     // this.state = {
     //   user: '',
     //   pwd: '',
     //   rpwd: '',
     //   type: 'genius' // 牛人
     // }
-  }
+  // }
 
   handleRegister() {
     this.props.register(this.props.state)    

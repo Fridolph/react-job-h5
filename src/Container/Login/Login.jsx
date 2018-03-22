@@ -11,10 +11,7 @@ import ImoocForm from '../../Components/ImoocForm/ImoocForm'
 @connect(state => state.user, { login })
 @ImoocForm
 class Login extends Component {
-  constructor(props) {
-    super(props)    
-  }
-
+  
   handleEnterLogin(e) {
     if (e.which !== 13) return
     this.handleLogin()

@@ -51,7 +51,8 @@ class Dashboard extends Component {
     return (
       <div>
         <NavBar className="fixed-header" mode="dard">
-          {navList.find(v => v.path === pathname).title}
+          {/* {navList.find(v => v.path === pathname).title} */}
+          {navList.filter(v => v.path === pathname).title}
         </NavBar>
         <Switch>
           {navList.map(v => (
